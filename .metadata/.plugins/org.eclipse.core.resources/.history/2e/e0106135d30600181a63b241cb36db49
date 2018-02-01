@@ -1,0 +1,47 @@
+package util;
+
+import java.util.HashMap;
+
+import driver.Iterator;
+import myTree.Node;
+
+public class TreeBuilder {
+	
+	public static  Node root;
+	public TreeBuilder(){
+		this.root = null;
+	}
+
+	public void insert(HashMap entries) {
+		for (String key : values.keySet()) {
+		    
+		}
+		
+		Node createNode = new Node(valuesIn);
+		if(null == root) {
+			root = createNode;
+			return;
+		}
+		
+		Node currentNode = root;
+		Node parentNode = null;
+		
+		while(true){
+			parentNode =currentNode;
+			
+			if(valuesIn.keySet() < currentNode.getData().keySet()){				
+				current = current.left;
+				if(current==null){
+					parent.left = newNode;
+					return;
+				}
+			}else{
+				current = current.right;
+				if(current==null){
+					parent.right = newNode;
+					return;
+				}
+			}
+	}
+}
+}

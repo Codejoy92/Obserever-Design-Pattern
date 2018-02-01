@@ -1,0 +1,21 @@
+package myTree;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Node implements ObserverI, SubjectI {
+
+	int bNumber;
+	ArrayList<String> courses= new ArrayList<>();
+	
+	
+	Node rightNode;
+	Node leftNode;
+
+	
+	public Node(Integer key, String value) {
+		data.put(key, value);
+		rightNode = null;
+		leftNode = null;
+	}
+}

@@ -1,0 +1,45 @@
+package util;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import myTree.Node;
+
+public class TreeBuilder {
+
+	public static Node root;
+
+	public TreeBuilder() {
+		this.root = null;
+	}
+
+	public void build(HashMap<Integer, String> entries) {
+
+		for (Map.Entry<Integer, String> entry : entries.entrySet()) {
+			Integer key = entry.getKey();
+			String value = entry.getValue();
+
+			// Data validation
+			boolean validEntry = validateEntry(key, value);
+
+			if (validEntry) {
+				Node createNode = new Node(key, value);
+			}
+
+		}
+
+		if (null == root) {
+			root = createNode;
+			return;
+		}
+
+		Node currentNode = root;
+		Node parentNode = null;
+
+	}
+
+	private boolean validateEntry(Integer key, String value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+}

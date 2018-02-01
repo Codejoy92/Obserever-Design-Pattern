@@ -1,0 +1,18 @@
+package myTree;
+
+import java.util.HashMap;
+
+public class Node implements ObserverI, SubjectI {
+
+	Integer bNumber;
+	
+	Node rightNode;
+	Node leftNode;
+
+	
+	public Node(Integer key, String value) {
+		data.put(key, value);
+		rightNode = null;
+		leftNode = null;
+	}
+}

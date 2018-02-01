@@ -1,0 +1,10 @@
+package lab01;
+
+public class Node {
+
+	public void static main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

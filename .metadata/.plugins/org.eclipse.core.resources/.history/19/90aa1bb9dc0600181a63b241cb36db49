@@ -1,0 +1,19 @@
+package myTree;
+
+import java.util.ArrayList;
+
+public class Node implements ObserverI, SubjectI {
+
+	int bNumber;
+	ArrayList<String> courses= new ArrayList<>();
+	Node rightNode;
+	Node leftNode;
+
+	
+	public Node(Integer key, ArrayList<String> value) {
+		bNumber = key;
+		courses = value;
+		rightNode = null;
+		leftNode = null;
+	}
+}

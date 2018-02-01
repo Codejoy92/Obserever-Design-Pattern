@@ -1,0 +1,15 @@
+package myTree;
+
+import java.util.HashMap;
+
+public class Node {
+
+	HashMap<Integer, String> data = new HashMap<Integer, String>();
+	Node left;
+	Node right;	
+	public Node(Hashmap data){
+		this.data = data;
+		left = null;
+		right = null;
+	}
+}

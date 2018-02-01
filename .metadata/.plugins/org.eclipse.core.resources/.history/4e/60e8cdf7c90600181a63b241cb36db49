@@ -1,0 +1,32 @@
+package util;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class FileProcessor {
+
+	public boolean initialize(String datafile) throws FileNotFoundException {
+		if (null == datafile) {
+			throw new FileNotFoundException("File Name is null");
+		}
+		
+		File file = new File(datafile);
+		if (!file.exists()) {
+			throw new FileNotFoundException("Could not find File: " + datafile);
+		}
+		
+		Scanner instrScanner = new Scanner(file);
+		
+		while (instrScanner.hasNextLine()) {
+			String instr = instrScanner.nextLine();
+			
+			if (null != instr && (!instr.trim().isEmpty())) {
+				
+			}
+		}
+
+		instrScanner.close();
+	}
+
+}
