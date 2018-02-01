@@ -1,7 +1,0 @@
-package myTree;
-
-import java.util.ArrayList;
-
-public class Node implements ObserverI, SubjectI {
-	
-}
