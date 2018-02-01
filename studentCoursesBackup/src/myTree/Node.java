@@ -1,15 +1,17 @@
 package myTree;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Node implements ObserverI, SubjectI {
 
 	int bNumber;
-	ArrayList<String> courses= new ArrayList<>();
+	Set<String> courses= new HashSet<String>();
 	public Node rightNode;
 	public Node leftNode;
 
-	public Node(Integer key, ArrayList<String> value) {
+	public Node(Integer key, Set<String> value) {
 		bNumber = key;
 		courses = value;
 		rightNode = null;
@@ -24,11 +26,11 @@ public class Node implements ObserverI, SubjectI {
 		this.bNumber = bNumber;
 	}
 
-	public ArrayList<String> getCourses() {
+	public Set<String> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(ArrayList<String> courses) {
+	public void setCourses(Set<String> courses) {
 		this.courses = courses;
 	}
 
