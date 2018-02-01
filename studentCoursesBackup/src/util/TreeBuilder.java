@@ -2,6 +2,7 @@ package util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -16,8 +17,9 @@ public class TreeBuilder {
 		this.root = null;
 	}
 
-	public void build(HashMap<Integer, Set<String>> dataMap) {
+	public Node build(LinkedHashMap<Integer, Set<String>> dataMap) {
 
+		Node node = new Node();
 		for (Entry<Integer, Set<String>> entry : dataMap.entrySet()) {
 			Integer key = entry.getKey();
 			Set<String> value = entry.getValue();
@@ -26,18 +28,19 @@ public class TreeBuilder {
 			boolean validEntry = validateEntry(key, value);
 
 			if (validEntry) {
-				this.insert(key, value);
+				node = this.insert(key, value);
 			}
 		}
+		return node;
 	}
 
-	public void insert(Integer key, Set<String> value) {
+	public Node insert(Integer key, Set<String> value) {
 
 		Node newNode = new Node(key, value);
 
 		if (null == root) {
 			root = newNode;
-			return;
+			return root;
 		}
 		Node current = root;
 		Node parent = null;
@@ -48,13 +51,13 @@ public class TreeBuilder {
 				current = current.leftNode;
 				if(current==null){
 					parent.leftNode = newNode;
-					return;
+					return root;
 				}
 			}else{
 				current = current.rightNode;
 				if(current==null){
 					parent.rightNode = newNode;
-					return;
+					return root;
 				}
 			}
 		}
@@ -63,6 +66,6 @@ public class TreeBuilder {
 
 	private boolean validateEntry(Integer key, Set<String> value) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

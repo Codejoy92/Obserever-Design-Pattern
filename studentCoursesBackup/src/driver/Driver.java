@@ -3,8 +3,10 @@ package driver;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Set;
 
+import myTree.Node;
 import util.FileProcessor;
 import util.TreeBuilder;
 
@@ -12,7 +14,8 @@ public class Driver {
 
 	private static FileProcessor fileProcessor;
 	private static TreeBuilder treeBuilder;
-	private static HashMap<Integer, Set<String>> dataMap = new HashMap<Integer, Set<String>>();
+	private static Node node;
+	private static LinkedHashMap<Integer, Set<String>> dataMap = new LinkedHashMap<Integer, Set<String>>();
 	
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -21,11 +24,13 @@ public class Driver {
 			return;
 		}
 		fileProcessor = new FileProcessor();
+		node = new Node();
 		String inputFileName = args[0];
 		dataMap = fileProcessor.initialize(inputFileName);
-		System.out.println(dataMap);
+		//System.out.println(dataMap);
 		treeBuilder = new TreeBuilder();
-		treeBuilder.build(dataMap);
+		node = treeBuilder.build(dataMap);
+		fileProcessor.display(node);
 	}
 
 }

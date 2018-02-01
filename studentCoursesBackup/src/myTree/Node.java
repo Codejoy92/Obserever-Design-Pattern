@@ -18,6 +18,9 @@ public class Node implements ObserverI, SubjectI {
 		leftNode = null;
 	}
 
+	public Node() {
+	}
+
 	public int getbNumber() {
 		return bNumber;
 	}
