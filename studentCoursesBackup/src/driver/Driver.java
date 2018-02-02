@@ -16,21 +16,28 @@ public class Driver {
 	private static TreeBuilder treeBuilder;
 	private static Node node;
 	private static LinkedHashMap<Integer, Set<String>> dataMap = new LinkedHashMap<Integer, Set<String>>();
+	private static LinkedHashMap<Integer, Set<String>> deleteDataMap = new LinkedHashMap<Integer, Set<String>>();
 	
 	public static void main(String[] args) throws FileNotFoundException {
 
-		if (null == args || args.length != 1) {
-			System.out.println("Invalid command line arguments");
+		if (null == args || args.length != 2) {
+			System.out.println("Invalid command line arguments, Must pass 5 text files");
 			return;
 		}
 		fileProcessor = new FileProcessor();
+		treeBuilder = new TreeBuilder();
 		node = new Node();
+		
 		String inputFileName = args[0];
 		dataMap = fileProcessor.initialize(inputFileName);
-		//System.out.println(dataMap);
-		treeBuilder = new TreeBuilder();
 		node = treeBuilder.build(dataMap);
 		fileProcessor.display(node);
+		
+		String deleteFileName = args[1];
+		deleteDataMap = fileProcessor.initialize(deleteFileName);
+		node = treeBuilder.delete(deleteDataMap);
+		fileProcessor.display(node);
+		
 	}
 
 }
