@@ -1,17 +1,16 @@
 package studentCoursesBackup.myTree;
 
+import java.util.ArrayList;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class Node implements ObserverI, SubjectI {
+public class Node implements ObserverI, SubjectI, Cloneable {
 
 	int bNumber;
-	Set<String> courses= new HashSet<String>();
+	ArrayList<String> courses= new ArrayList<String>();
+	private ArrayList<Node> backupNodesList = new ArrayList<>();
 	public Node rightNode;
 	public Node leftNode;
 
-	public Node(Integer key, Set<String> value) {
+	public Node(Integer key, ArrayList<String> value) {
 		bNumber = key;
 		courses = value;
 		rightNode = null;
@@ -29,12 +28,56 @@ public class Node implements ObserverI, SubjectI {
 		this.bNumber = bNumber;
 	}
 
-	public Set<String> getCourses() {
+	public ArrayList<String> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(Set<String> courses) {
+	public void setCourses(ArrayList<String> courses) {
 		this.courses = courses;
 	}
+
+	public ArrayList<Node> getBackupNodesList() {
+		return backupNodesList;
+	}
+
+	public void setBackupNodesList(ArrayList<Node> backupNodesList) {
+		this.backupNodesList = backupNodesList;
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{
+		return new Node();
+	}
+
+	@Override
+	public void removeObserver(Node observerRemove) {
+		backupNodesList.remove(observerRemove);
+		
+	}
+
+	@Override
+	public void addObserver(Node observerAdd) {
+		backupNodesList.add(observerAdd);
+		
+	}
+
+	@Override
+	public void notifyObservers(int bNumber, String course) {
+		for(Node backupNodes : backupNodesList) {
+			backupNodes.getCourses().remove(course);
+		}
+		
+	}
+
+	@Override
+	public void update(int bNumber, String course) {
+		for(Node backupNodes : backupNodesList) {
+			backupNodes.getCourses().add(course);
+			backupNodes.setbNumber(bNumber);
+		}
+		
+	}
+	
+	
 
 }

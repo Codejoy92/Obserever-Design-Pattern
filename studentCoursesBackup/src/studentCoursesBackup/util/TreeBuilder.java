@@ -1,72 +1,62 @@
 package studentCoursesBackup.util;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import studentCoursesBackup.myTree.Node;
 
 
 public class TreeBuilder {
 
-	public static Node root;
+	public static Node root, backupRoot1, backupRoot2;
 
 	public TreeBuilder() {
 		this.root = null;
 	}
 
-	public Node build(LinkedHashMap<Integer, Set<String>> dataMap) {
+	public Node buildNode(int bnum, String course) {
 
 		Node node = new Node();
-		for (Entry<Integer, Set<String>> entry : dataMap.entrySet()) {
-			Integer key = entry.getKey();
-			Set<String> value = entry.getValue();
-
-			// Data validation
-			boolean validEntry = validateEntry(key, value);
-
-			if (validEntry) {
-				node = insert(key, value);
-			}
-		}
+			String value = course;
+			node.setbNumber(bnum);
+			node.getCourses().add(course);
 		return node;
 	}
 
-	public Node insert(Integer key, Set<String> value) {
-
-		Node newNode = new Node(key, value);
-
-		if (null == root) {
-			root = newNode;
-			return root;
+	public Node insert(Node rootNode, Node newNode) {
+		
+		if (null == rootNode) {
+			rootNode = newNode;
+			return rootNode;
 		}
-		Node current = root;
+		Node current = rootNode;
 		Node parent = null;
 		
 		while(true){
 			parent = current;
-			if(key < current.getbNumber()){				
+			if(newNode.getbNumber() < current.getbNumber()){				
 				current = current.leftNode;
 				if(current==null){
 					parent.leftNode = newNode;
-					return root;
+					return rootNode;
 				}
 			}else{
 				current = current.rightNode;
 				if(current==null){
 					parent.rightNode = newNode;
-					return root;
+					return rootNode;
 				}
 			}
 		}
 
 	}
 	
-	public Node delete(LinkedHashMap<Integer, Set<String>> deleteDataMap){
+	public Node delete(Map<Integer, String> deleteDataMap){
 		
-		for (Entry<Integer, Set<String>> entry : deleteDataMap.entrySet()) {
+		for (Entry<Integer, String> entry : deleteDataMap.entrySet()) {
 			Integer key = entry.getKey();
-			Set<String> value = entry.getValue();
+			String value = entry.getValue();
 			boolean nodeSearch = true;
 			Node current = root;
 			while(nodeSearch){
@@ -75,22 +65,79 @@ public class TreeBuilder {
 				}else if(key > current.getbNumber()){
 					current = current.rightNode;
 				} else {
-					Set<String> courses = current.getCourses();
-					for (String s : value) {
-					    if(courses.contains(s)) {
-							courses.remove(s);
+					    if(current.getCourses().contains(value)) {
+					    	current.getCourses().remove(value);
 							}
 					}
 					nodeSearch = false;
 				}
 			}
+		return root;	
 		}
-		
-		return root;		
-	}
 
-	private boolean validateEntry(Integer key, Set<String> value) {
-		// TODO Auto-generated method stub
+	public boolean validateEntry(Integer key, String value) {
+		boolean nodeSearch = true;
+		Node current = root;
+		while(nodeSearch && null!= root && null!= current){
+			if(key < current.getbNumber()){				
+				current = current.leftNode;
+			}else if(key > current.getbNumber()){
+				current = current.rightNode;
+			} else if(key == current.getbNumber()){
+						nodeSearch = false;
+				    	return false; //course name already exisits 
+				}else {
+					nodeSearch = false;
+					return false; //no such bnumber exisits
+				}
+			}
 		return true;
 	}
+
+	public void addCourseToExisitingNode(Integer bnumber, String courses) {
+		boolean nodeSearch = true;
+		Node current = root;
+		while(nodeSearch){
+			if(bnumber < current.getbNumber()){				
+				current = current.leftNode;
+			}else if(bnumber > current.getbNumber()){
+				current = current.rightNode;
+			} else if(bnumber == current.getbNumber()){
+				if(!current.getCourses().contains(courses)) {
+					current.getCourses().add(courses);
+					int bnum = bnumber;
+					root.update(bnum,courses);
+				}
+				nodeSearch = false;
+			}else {
+				nodeSearch = false;
+			}
+			}
+		
+	}
+
+	public void insertInAllTrees(Node originalNode, Node backupNode1, Node backupNode2) {
+		root = insert(root, originalNode);
+		backupRoot1 = insert(backupRoot1, backupNode1);
+		backupRoot2 = insert(backupRoot2, backupNode2);
+	}
+	
+/*	public Node searchNode(Integer key, String value) {
+		Node node = new Node();
+		boolean nodeSearch = true;
+		Node current = root;
+		while(nodeSearch){
+			if(key < current.getbNumber()){				
+				current = current.leftNode;
+			}else if(key > current.getbNumber()){
+				current = current.rightNode;
+			} else if(key == current.getbNumber()){
+				return node;
+			}else {
+				nodeSearch = false;
+			}
+			}
+		return node;
+		
+	}*/
 }
