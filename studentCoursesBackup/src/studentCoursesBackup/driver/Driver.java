@@ -2,13 +2,13 @@ package studentCoursesBackup.driver;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import studentCoursesBackup.myTree.Node;
 import studentCoursesBackup.util.FileProcessor;
+import studentCoursesBackup.util.Results;
 import studentCoursesBackup.util.TreeBuilder;
 
 public class Driver {
@@ -18,8 +18,6 @@ public class Driver {
 	private static Node originalNode;
 	private static Node backupNode1;
 	private static Node backupNode2;
-	private static Map<Integer, String> dataMap = new HashMap<Integer, String>();
-	private static Map<Integer, String> deleteDataMap = new HashMap<Integer, String>();
 	
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -30,9 +28,9 @@ public class Driver {
 		fileProcessor = new FileProcessor();
 		treeBuilder = new TreeBuilder();
 		
+	//insertion process starts
 		String inputFileName = args[0];
-		fileProcessor.fileCheck(inputFileName);
-		
+		fileProcessor.fileCheck(inputFileName);	
 		File file = new File(inputFileName);
 		Scanner dataScanner = new Scanner(file);
 		
@@ -58,7 +56,6 @@ public class Driver {
 							originalNode.addObserver(backupNode2);
 						}catch(CloneNotSupportedException e) {
 							System.out.println("Problem with cloning");
-							e.printStackTrace();
 							System.exit(0);
 						}
 					
@@ -73,18 +70,44 @@ public class Driver {
 				System.exit(0);
 			}
 		}dataScanner.close();
-		fileProcessor.display(treeBuilder.backupRoot1);
+		//insertion process ends
 		
+		//Delete Process Start
 		String deleteFileName = args[1];
-	/*	deleteDataMap = fileProcessor.initialize(deleteFileName);
-		originalNode = treeBuilder.delete(deleteDataMap);*/
-	//	fileProcessor.display(originalNode);
-	//	fileProcessor.display(backupNode1);
+		fileProcessor.fileCheck(deleteFileName);	
+		File deleteFile = new File(deleteFileName);
+		Scanner delteDataScanner = new Scanner(deleteFile);
+		
+		while (delteDataScanner.hasNextLine()) {
+			String deleteData = delteDataScanner.nextLine();
+			if (null != deleteData && (!deleteData.trim().isEmpty())) {
+					String[] splitData = deleteData.split(":");
+					int bNumberDelete = Integer.parseInt(splitData[0]);
+					String courseDelete = splitData[1];
+					treeBuilder.deleteCourse(bNumberDelete, courseDelete);
+			}else {
+				System.out.println("no data in file");
+				System.exit(0);
+			}
+		}dataScanner.close();
+		//Delete Process ends
+
+		//storing process starts
 		String outputFile1 = args[2];
 		String outputFile2 = args[3];
 		String outputFile3 = args[4];
 		
-		
+		Results originalTreeResults = new Results();
+    	Results backupTreeResults1 = new Results();
+    	Results backupTreeResults2 = new Results();
+
+    	treeBuilder.printNodes(originalTreeResults, backupTreeResults1, backupTreeResults2);
+
+    	originalTreeResults.generateOutputFile(outputFile1);
+    	backupTreeResults1.generateOutputFile(outputFile2);
+    	backupTreeResults2.generateOutputFile(outputFile3);
+    	
+		//storing process ends
 	}
 
 }

@@ -54,29 +54,6 @@ public class TreeBuilder {
 
 	}
 	
-	public Node delete(Map<Integer, String> deleteDataMap){
-		
-		for (Entry<Integer, String> entry : deleteDataMap.entrySet()) {
-			Integer key = entry.getKey();
-			String value = entry.getValue();
-			boolean nodeSearch = true;
-			Node current = root;
-			while(nodeSearch){
-				if(key < current.getbNumber()){				
-					current = current.leftNode;
-				}else if(key > current.getbNumber()){
-					current = current.rightNode;
-				} else {
-					    if(current.getCourses().contains(value)) {
-					    	current.getCourses().remove(value);
-							}
-					}
-					nodeSearch = false;
-				}
-			}
-		return root;	
-		}
-
 	public boolean validateEntry(Integer key, String value) {
 		boolean nodeSearch = true;
 		Node current = root;
@@ -123,23 +100,47 @@ public class TreeBuilder {
 		backupRoot1 = insert(backupRoot1, backupNode1);
 		backupRoot2 = insert(backupRoot2, backupNode2);
 	}
+
+	public void deleteCourse(int bNumberDelete, String courseDelete) {
+
+			boolean nodeSearch = true;
+			Node current = root;
+			while(nodeSearch && null!= root){
+				if(bNumberDelete < current.getbNumber()){				
+					current = current.leftNode;
+				}else if(bNumberDelete > current.getbNumber()){
+					current = current.rightNode;
+				} else {
+					    if(current.getCourses().contains(courseDelete)) {
+					    	current.getCourses().remove(courseDelete);
+					    	current.notifyObservers(bNumberDelete, courseDelete);
+							}
+					    nodeSearch = false;
+					}
+					
+				}
+			}
 	
-/*	public Node searchNode(Integer key, String value) {
-		Node node = new Node();
-		boolean nodeSearch = true;
-		Node current = root;
-		while(nodeSearch){
-			if(key < current.getbNumber()){				
-				current = current.leftNode;
-			}else if(key > current.getbNumber()){
-				current = current.rightNode;
-			} else if(key == current.getbNumber()){
-				return node;
-			}else {
-				nodeSearch = false;
-			}
-			}
-		return node;
-		
-	}*/
+
+	public void printNodes(Results originalTreeResults, Results backupTreeResults1, Results backupTreeResults2) {
+		addToResultList(root, originalTreeResults);
+		addToResultList(backupRoot1, backupTreeResults1);
+		addToResultList(backupRoot2, backupTreeResults2);
+	}
+	
+	private void addToResultList(Node rootNode, Results result) {
+		 if (null != rootNode) {
+			 	addToResultList(rootNode.leftNode, result);
+			 	StringBuilder builder = new StringBuilder();
+				builder.append(rootNode.getbNumber());
+				builder.append(":");
+				for (String courses : rootNode.getCourses()) {
+					builder.append(" " + courses);
+				}
+				result.getOutputList().add(builder.toString());
+				addToResultList(rootNode.rightNode, result);
+	        }
+	}
+
 }
+

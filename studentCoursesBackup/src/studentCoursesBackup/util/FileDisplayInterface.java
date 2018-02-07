@@ -1,8 +1,6 @@
 package studentCoursesBackup.util;
 
-import studentCoursesBackup.myTree.Node;
-
 public interface FileDisplayInterface {
+	public void generateOutputFile(String s);
 
-	void display(Node root);
 }
