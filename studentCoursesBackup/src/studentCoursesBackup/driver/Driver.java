@@ -47,10 +47,21 @@ public class Driver {
 					if(treeBuilder.validateEntry(bNumber, course)) {
 						originalNode = treeBuilder.buildNode(bNumber, course);
 						//cloning orignal node values to backup nodes and adding them to observer list
-						backupNode1 = treeBuilder.buildNode(bNumber, course);
-						backupNode2 = treeBuilder.buildNode(bNumber, course);
-						originalNode.addObserver(backupNode1);
-						originalNode.addObserver(backupNode2);
+						try {
+							backupNode1 = (Node) originalNode.clone();
+							backupNode2 = (Node) originalNode.clone();
+							backupNode1.setbNumber(bNumber);
+							backupNode2.setbNumber(bNumber);
+							backupNode1.getCourses().add(course);
+							backupNode2.getCourses().add(course);
+							originalNode.addObserver(backupNode1);
+							originalNode.addObserver(backupNode2);
+						}catch(CloneNotSupportedException e) {
+							System.out.println("Problem with cloning");
+							e.printStackTrace();
+							System.exit(0);
+						}
+					
 						treeBuilder.insertInAllTrees(originalNode, backupNode1, backupNode2);
 					}else {
 						//if its an existing bnumber
@@ -62,26 +73,18 @@ public class Driver {
 				System.exit(0);
 			}
 		}dataScanner.close();
-		fileProcessor.display(treeBuilder.root);
+		fileProcessor.display(treeBuilder.backupRoot1);
 		
 		String deleteFileName = args[1];
 	/*	deleteDataMap = fileProcessor.initialize(deleteFileName);
 		originalNode = treeBuilder.delete(deleteDataMap);*/
-		fileProcessor.display(originalNode);
-		
+	//	fileProcessor.display(originalNode);
+	//	fileProcessor.display(backupNode1);
 		String outputFile1 = args[2];
 		String outputFile2 = args[3];
 		String outputFile3 = args[4];
 		
 		
 	}
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-	
-	
 
 }

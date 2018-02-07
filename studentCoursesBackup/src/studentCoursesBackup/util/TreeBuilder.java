@@ -13,6 +13,8 @@ public class TreeBuilder {
 
 	public TreeBuilder() {
 		this.root = null;
+		this.backupRoot1 = null;
+		this.backupRoot2 = null;
 	}
 
 	public Node buildNode(int bnum, String course) {
@@ -106,7 +108,7 @@ public class TreeBuilder {
 				if(!current.getCourses().contains(courses)) {
 					current.getCourses().add(courses);
 					int bnum = bnumber;
-					root.update(bnum,courses);
+					current.update(bnum,courses);
 				}
 				nodeSearch = false;
 			}else {

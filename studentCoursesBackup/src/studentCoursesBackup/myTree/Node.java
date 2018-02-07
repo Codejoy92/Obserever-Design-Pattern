@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Node implements ObserverI, SubjectI, Cloneable {
 
 	int bNumber;
-	ArrayList<String> courses= new ArrayList<String>();
-	private ArrayList<Node> backupNodesList = new ArrayList<>();
+	private ArrayList<String> courses = new ArrayList<String>();;
+	private ArrayList<Node> backupNodesList = new ArrayList<Node>();
 	public Node rightNode;
 	public Node leftNode;
 
