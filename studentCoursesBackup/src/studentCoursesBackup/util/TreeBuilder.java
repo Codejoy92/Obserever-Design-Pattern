@@ -140,7 +140,7 @@ public class TreeBuilder {
 
 		boolean nodeSearch = true;
 		Node current = root;
-		while (nodeSearch && null != root) {
+		while (nodeSearch && null != root && null != current) {
 			if (bNumberDelete < current.getbNumber()) {
 				current = current.leftNode;
 			} else if (bNumberDelete > current.getbNumber()) {

@@ -40,4 +40,10 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		}
 	}
 
+	@Override
+	public void writeToStdout(String str) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
