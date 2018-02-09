@@ -43,41 +43,39 @@ public class Node implements ObserverI, SubjectI, Cloneable {
 	public void setBackupNodesList(ArrayList<Node> backupNodesList) {
 		this.backupNodesList = backupNodesList;
 	}
-	
+
 	@Override
-	public Object clone() throws CloneNotSupportedException{
+	public Object clone() throws CloneNotSupportedException {
 		return new Node();
 	}
 
 	@Override
 	public void removeObserver(Node observerRemove) {
 		backupNodesList.remove(observerRemove);
-		
+
 	}
 
 	@Override
 	public void addObserver(Node observerAdd) {
 		backupNodesList.add(observerAdd);
-		
+
 	}
 
 	@Override
 	public void notifyObservers(int bNumber, String course) {
-		for(Node backupNodes : backupNodesList) {
+		for (Node backupNodes : backupNodesList) {
 			backupNodes.getCourses().remove(course);
 		}
-		
+
 	}
 
 	@Override
 	public void update(int bNumber, String course) {
-		for(Node backupNodes : backupNodesList) {
+		for (Node backupNodes : backupNodesList) {
 			backupNodes.getCourses().add(course);
 			backupNodes.setbNumber(bNumber);
 		}
-		
+
 	}
-	
-	
 
 }
