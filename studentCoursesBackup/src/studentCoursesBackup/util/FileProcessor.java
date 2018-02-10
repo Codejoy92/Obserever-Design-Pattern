@@ -1,19 +1,33 @@
 package studentCoursesBackup.util;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class FileProcessor {
 
-	public void fileCheck(String datafile) throws FileNotFoundException {
+	BufferedReader reader;
+	FileReader file;
 
-		if (null == datafile) {
-			throw new FileNotFoundException("File Name is null");
-		}
+	public String readline() {
+		String entry = null;
+			try {
+				entry = reader.readLine();
+			} catch (IOException e) {
+				System.out.println(e);
+				System.exit(1);
+			}
+		return entry;
+	}
 
-		File file = new File(datafile);
-		if (!file.exists()) {
-			throw new FileNotFoundException("Could not find File: " + datafile);
+	public void fileCheck(String datafile) {
+		try {
+			file = new FileReader(datafile);
+			reader = new BufferedReader(file);
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			System.exit(1);
 		}
 	}
 }

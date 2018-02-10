@@ -28,13 +28,12 @@ public class Driver {
 
 		// insertion process starts
 		String inputFileName = args[0];
+		String data ="";
 		fileProcessor.fileCheck(inputFileName);
-		File file = new File(inputFileName);
-		Scanner dataScanner = new Scanner(file);
 
-		while (dataScanner.hasNextLine()) {
-
-			String data = dataScanner.nextLine();
+		while (null!=data) {
+			
+			data = fileProcessor.readline();
 			if (null != data && (!data.trim().isEmpty())) {
 				String[] splitData = data.split(":");
 				int bNumber = Integer.parseInt(splitData[0]);
@@ -62,12 +61,9 @@ public class Driver {
 					// if its an existing bnumber
 					treeBuilder.addCourseToExisitingNode(bNumber, course);
 				}
-			} else {
-				System.out.println("no data in file");
-				System.exit(0);
 			}
 		}
-		dataScanner.close();
+		
 		// insertion process ends
 
 		// Delete Process Start
