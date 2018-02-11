@@ -73,7 +73,6 @@ public class Node implements ObserverI, SubjectI, Cloneable {
 	public void update(int bNumber, String course) {
 		for (Node backupNodes : backupNodesList) {
 			backupNodes.getCourses().add(course);
-			backupNodes.setbNumber(bNumber);
 		}
 
 	}

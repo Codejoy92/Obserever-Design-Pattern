@@ -30,7 +30,6 @@ public class Driver {
 		String inputFileName = args[0];
 		String data ="";
 		fileProcessor.fileCheck(inputFileName);
-
 		while (null!=data) {
 			
 			data = fileProcessor.readline();
@@ -67,24 +66,18 @@ public class Driver {
 		// insertion process ends
 
 		// Delete Process Start
+		data = "";
 		String deleteFileName = args[1];
 		fileProcessor.fileCheck(deleteFileName);
-		File deleteFile = new File(deleteFileName);
-		Scanner delteDataScanner = new Scanner(deleteFile);
-
-		while (delteDataScanner.hasNextLine()) {
-			String deleteData = delteDataScanner.nextLine();
-			if (null != deleteData && (!deleteData.trim().isEmpty())) {
-				String[] splitData = deleteData.split(":");
+		while (null!=data) {
+			data = fileProcessor.readline();
+			if (null != data && (!data.trim().isEmpty())) {
+				String[] splitData = data.split(":");
 				int bNumberDelete = Integer.parseInt(splitData[0]);
 				String courseDelete = splitData[1];
 				treeBuilder.deleteCourse(bNumberDelete, courseDelete);
-			} else {
-				System.out.println("no data in file");
-				System.exit(0);
 			}
 		}
-		delteDataScanner.close();
 		// Delete Process ends
 
 		// storing process starts
