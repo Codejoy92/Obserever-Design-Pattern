@@ -9,7 +9,8 @@ public class Node implements ObserverI, SubjectI, Cloneable {
 	private ArrayList<Node> backupNodesList = new ArrayList<Node>();
 	public Node rightNode;
 	public Node leftNode;
-
+	public OperationEnum enumKey;
+	
 	public Node(Integer key, ArrayList<String> value) {
 		bNumber = key;
 		courses = value;
@@ -62,17 +63,20 @@ public class Node implements ObserverI, SubjectI, Cloneable {
 	}
 
 	@Override
-	public void notifyObservers(int bNumber, String course) {
-		for (Node backupNodes : backupNodesList) {
-			backupNodes.getCourses().remove(course);
-		}
-
+	public void notifyObservers(int bNumber, String course, OperationEnum enumValue) {
+		update(bNumber, course, enumValue);
 	}
 
 	@Override
-	public void update(int bNumber, String course) {
+	public void update(int bNumber, String course, OperationEnum enumValue) {
+		if(enumKey.INSERT== enumValue) {
 		for (Node backupNodes : backupNodesList) {
 			backupNodes.getCourses().add(course);
+		}
+		}else if(enumKey.DELETE== enumValue) {
+			for (Node backupNodes : backupNodesList) {
+				backupNodes.getCourses().remove(course);
+			}			
 		}
 
 	}

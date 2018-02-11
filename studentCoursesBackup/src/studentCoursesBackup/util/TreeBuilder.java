@@ -1,11 +1,12 @@
 package studentCoursesBackup.util;
 
 import studentCoursesBackup.myTree.Node;
+import studentCoursesBackup.myTree.OperationEnum;
 
 public class TreeBuilder {
 
 	public Node root, backupRoot1, backupRoot2;
-
+	public OperationEnum enum1;
 	public TreeBuilder() {
 		this.root = null;
 		this.backupRoot1 = null;
@@ -120,7 +121,7 @@ public class TreeBuilder {
 				if (!current.getCourses().contains(courses)) {
 					current.getCourses().add(courses);
 					int bnum = bnumber;
-					current.update(bnum, courses);
+					current.notifyObservers(bnum, courses, enum1.INSERT);
 				}
 				nodeSearch = false;
 			} else {
@@ -148,7 +149,7 @@ public class TreeBuilder {
 			} else {
 				if (current.getCourses().contains(courseDelete)) {
 					current.getCourses().remove(courseDelete);
-					current.notifyObservers(bNumberDelete, courseDelete);
+					current.notifyObservers(bNumberDelete, courseDelete, enum1.DELETE);
 				}
 				nodeSearch = false;
 			}
