@@ -63,12 +63,12 @@ public class Node implements ObserverI, SubjectI, Cloneable {
 	}
 
 	@Override
-	public void notifyObservers(int bNumber, String course, OperationEnum enumValue) {
-		update(bNumber, course, enumValue);
+	public void notifyObservers(String course, OperationEnum enumValue) {
+		update(course, enumValue);
 	}
 
 	@Override
-	public void update(int bNumber, String course, OperationEnum enumValue) {
+	public void update(String course, OperationEnum enumValue) {
 		if(enumKey.INSERT== enumValue) {
 		for (Node backupNodes : backupNodesList) {
 			backupNodes.getCourses().add(course);

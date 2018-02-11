@@ -121,7 +121,7 @@ public class TreeBuilder {
 				if (!current.getCourses().contains(courses)) {
 					current.getCourses().add(courses);
 					int bnum = bnumber;
-					current.notifyObservers(bnum, courses, enum1.INSERT);
+					current.notifyObservers(courses, enum1.INSERT);
 				}
 				nodeSearch = false;
 			} else {
@@ -149,7 +149,7 @@ public class TreeBuilder {
 			} else {
 				if (current.getCourses().contains(courseDelete)) {
 					current.getCourses().remove(courseDelete);
-					current.notifyObservers(bNumberDelete, courseDelete, enum1.DELETE);
+					current.notifyObservers(courseDelete, enum1.DELETE);
 				}
 				nodeSearch = false;
 			}
@@ -189,5 +189,6 @@ public class TreeBuilder {
 			addToResultList(rootNode.rightNode, result);
 		}
 	}
+	
 
 }
