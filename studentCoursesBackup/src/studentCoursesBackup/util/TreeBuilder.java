@@ -196,7 +196,15 @@ public class TreeBuilder {
 	 */
 	public void displayTree() {
 		Results result = new Results();
+		System.out.println("Original Tree");
 		result.display(root);
+		System.out.println();
+		System.out.println("Backup Tree1");
+		result.display(backupRoot1);
+		System.out.println();
+		System.out.println("Backup Tree2");
+		result.display(backupRoot2);
+		
 	}
 
 }
