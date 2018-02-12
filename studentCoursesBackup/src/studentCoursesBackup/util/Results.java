@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import studentCoursesBackup.myTree.Node;
+
 public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 
 	List<String> outputList = new ArrayList<>();
@@ -41,9 +43,13 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 	}
 
 	@Override
-	public void writeToStdout(String str) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+		public void display(Node root) {
+					if(root!=null){
+						display(root.leftNode);
+						System.out.println(root.getbNumber()+":"+root.getCourses());
+						display(root.rightNode);
+					}
+					
+				}
 }

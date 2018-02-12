@@ -190,5 +190,13 @@ public class TreeBuilder {
 		}
 	}
 	
+	/**
+	 * This function is used for displaying original tree
+	 * 
+	 */
+	public void displayTree() {
+		Results result = new Results();
+		result.display(root);
+	}
 
 }

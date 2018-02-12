@@ -81,4 +81,11 @@ public class Node implements ObserverI, SubjectI, Cloneable {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Node [bNumber=" + bNumber + ", courses=" + courses + ", backupNodesList=" + backupNodesList
+				+ ", rightNode=" + rightNode + ", leftNode=" + leftNode + ", enumKey=" + enumKey + "]";
+	}
+	
+
 }

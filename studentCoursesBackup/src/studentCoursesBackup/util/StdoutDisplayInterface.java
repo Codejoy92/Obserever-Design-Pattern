@@ -1,5 +1,7 @@
 package studentCoursesBackup.util;
 
+import studentCoursesBackup.myTree.Node;
+
 public interface StdoutDisplayInterface {
-	public void writeToStdout(String str);
+	public void display(Node node);
 }

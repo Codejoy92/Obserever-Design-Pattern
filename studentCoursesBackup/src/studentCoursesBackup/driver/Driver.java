@@ -1,8 +1,6 @@
 package studentCoursesBackup.driver;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import studentCoursesBackup.myTree.Node;
 import studentCoursesBackup.util.FileProcessor;
@@ -19,9 +17,11 @@ public class Driver {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		if (null == args || args.length != 5) {
-			System.out.println("Invalid command line arguments, Must pass 5 text files");
-			return;
+		if (args.length != 5 || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")
+				|| args[3].equals("${arg3}") || args[4].equals("${arg4}") || null == args) {
+
+			System.err.println("Error: Incorrect number of arguments. Program pass 5 argumnets.");
+			System.exit(0);
 		}
 		fileProcessor = new FileProcessor();
 		treeBuilder = new TreeBuilder();
@@ -50,6 +50,8 @@ public class Driver {
 						backupNode2.getCourses().add(course);
 						originalNode.addObserver(backupNode1);
 						originalNode.addObserver(backupNode2);
+					//Following print statement can be useful while debugging entries in tree. uncomment it to use.
+					//	System.out.println(originalNode.toString());
 					} catch (CloneNotSupportedException e) {
 						System.out.println("Problem with cloning");
 						System.exit(0);
@@ -62,7 +64,6 @@ public class Driver {
 				}
 			}
 		}
-		
 		// insertion process ends
 
 		// Delete Process Start
@@ -94,8 +95,11 @@ public class Driver {
 		originalTreeResults.generateOutputFile(outputFile1);
 		backupTreeResults1.generateOutputFile(outputFile2);
 		backupTreeResults2.generateOutputFile(outputFile3);
-
 		// storing process ends
+	
+		
+		//display
+		treeBuilder.displayTree();
 	}
 
 }
