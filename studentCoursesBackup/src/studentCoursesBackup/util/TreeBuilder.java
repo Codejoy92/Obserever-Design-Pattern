@@ -19,7 +19,7 @@ public class TreeBuilder {
 	 * 
 	 * @param bnum
 	 * @param courses
-	 * @return
+	 * @return created node
 	 */
 	public Node buildNode(int bnum, String course) {
 
@@ -35,7 +35,7 @@ public class TreeBuilder {
 	 * 
 	 * @param rootNode
 	 * @param newNode
-	 * @return
+	 * @return node after inserting
 	 */
 	private Node insert(Node rootNode, Node newNode) {
 
@@ -82,7 +82,7 @@ public class TreeBuilder {
 	 * This function validates if the bnumber already exisits in the tree
 	 * 
 	 * @param bnum
-	 * @return
+	 * @return true if bnumber is unique and false if bnumber already exisits
 	 */
 	public boolean validateEntry(Integer bnum) {
 		boolean nodeSearch = true;
@@ -94,12 +94,12 @@ public class TreeBuilder {
 				current = current.rightNode;
 			} else if (bnum == current.getbNumber()) {
 				nodeSearch = false;
-				return false; // bnumber already exisits
+				return false;
 			} else {
 				nodeSearch = false;
 			}
 		}
-		return true;// unique bumber
+		return true;
 	}
 
 	/**

@@ -12,7 +12,6 @@ public class FileProcessor {
 	/**
 	 * This function is used to read contents of file line by line
 	 * 
-	 * @param outputFile
 	 */
 	public String readline() {
 		String entry = null;
@@ -34,7 +33,7 @@ public class FileProcessor {
 	/**
 	 * This function validates the file's existence
 	 * 
-	 * @param outputFile
+	 * @param datafile
 	 */
 	public void fileCheck(String datafile) {
 		try {

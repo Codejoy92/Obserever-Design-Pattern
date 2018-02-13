@@ -50,7 +50,7 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 	/**
 	 * This function is used to display tree 
 	 * 
-	 * @param outputFile
+	 * @param root
 	 */
 	@Override
 		public void display(Node root) {
