@@ -15,7 +15,8 @@ ant -buildfile src/build.xml run -Darg0=input.txt -Darg1=delete.txt -Darg2=outpu
 -----------------------------------------------------------------------
 
 ## To create tarball for submission
-ant -buildfile src/build.xml tarzip
+tar -cvf sujoy_das_assign_1.tar sujoy_das_assign_1/
+gzip sujoy_das_assign_1.tar
 
 -----------------------------------------------------------------------
 
