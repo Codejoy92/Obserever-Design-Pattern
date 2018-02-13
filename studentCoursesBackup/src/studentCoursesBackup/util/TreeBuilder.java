@@ -191,6 +191,15 @@ public class TreeBuilder {
 	}
 	
 	/**
+	 * This function is used to search bNumber in original tree
+	 * @param bNum
+	 * @return true if bNumber present, else false
+	 */
+	public boolean searchBNumber(int bNum) {
+        return search(bNum, root);
+	}
+	
+	/**
 	 * This function is used for displaying original tree
 	 * 
 	 */
@@ -206,5 +215,28 @@ public class TreeBuilder {
 		result.display(backupRoot2);
 		
 	}
+	
+	
+	/**
+     * Helper function for searchBNumber 
+     * @param rootNode
+     * @param bNumber
+     * @return true if found else false
+     */
+    private boolean search(int bNum, Node rootNode) {
+        boolean Nodefound = false;
+        while ((rootNode != null) && !Nodefound) {
+            if (bNum < rootNode.getbNumber())
+            	rootNode = rootNode.leftNode;
+            else if (bNum > rootNode.getbNumber())
+            	rootNode = rootNode.rightNode;
+            else {
+            	Nodefound = true;
+                break;
+            }
+            Nodefound = search(bNum, rootNode);
+        }
+        return Nodefound;
+    }
 
 }
