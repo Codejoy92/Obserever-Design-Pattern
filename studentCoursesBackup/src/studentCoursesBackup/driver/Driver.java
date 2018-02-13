@@ -97,7 +97,6 @@ public class Driver {
 		backupTreeResults2.generateOutputFile(outputFile3);
 		// storing process ends
 	
-		
 		//display
 		treeBuilder.displayTree();
 	}

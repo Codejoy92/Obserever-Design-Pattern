@@ -28,7 +28,7 @@ grade of 0 for the involved assignment for my first offense and that I
 will receive a grade of F for the course for any additional
 offense."
 
-[Date: 02/12/2018]
+[Date: 02/13/2018]
 
 -----------------------------------------------------------------------
 

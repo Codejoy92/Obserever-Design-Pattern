@@ -21,6 +21,11 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		this.outputList = outputList;
 	}
 
+	/**
+	 * This function is used to write into output files
+	 * 
+	 * @param outputFile
+	 */
 	@Override
 	public void generateOutputFile(String outputFile) {
 
@@ -42,8 +47,12 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		}
 	}
 
+	/**
+	 * This function is used to display tree 
+	 * 
+	 * @param outputFile
+	 */
 	@Override
-	
 		public void display(Node root) {
 					if(root!=null){
 						display(root.leftNode);

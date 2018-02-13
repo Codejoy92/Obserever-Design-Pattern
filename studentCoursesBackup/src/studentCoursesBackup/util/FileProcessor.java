@@ -8,6 +8,12 @@ public class FileProcessor {
 
 	Scanner scan;
 	File file;
+	
+	/**
+	 * This function is used to read contents of file line by line
+	 * 
+	 * @param outputFile
+	 */
 	public String readline() {
 		String entry = null;
 			try {
@@ -25,6 +31,11 @@ public class FileProcessor {
 		return entry;
 	}
 
+	/**
+	 * This function validates the file's existence
+	 * 
+	 * @param outputFile
+	 */
 	public void fileCheck(String datafile) {
 		try {
 			file = new File(datafile);

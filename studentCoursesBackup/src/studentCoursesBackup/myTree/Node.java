@@ -63,7 +63,7 @@ public class Node implements ObserverI, SubjectI, Cloneable {
 	}
 
 	@Override
-	public void notifyObservers(String course, OperationEnum enumValue) {
+	public void notify(String course, OperationEnum enumValue) {
 		update(course, enumValue);
 	}
 
